@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { osmProviders, defaultMapSettings, getTileProvider, type TileProvider } from './osm-providers';
 import 'leaflet/dist/leaflet.css';
@@ -15,12 +15,14 @@ interface BasicMapProps {
     zoomControl?: boolean;
 }
 
-// Component to control map view
+// Component to control map view - with safety check
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
     const map = useMap();
 
     useEffect(() => {
-        map.setView(center, zoom);
+        if (map && map.getContainer() && map.getContainer()._leaflet_pos !== undefined) {
+            map.setView(center, zoom);
+        }
     }, [center, zoom, map]);
 
     return null;
@@ -37,9 +39,21 @@ export default function BasicMap({
 }: BasicMapProps) {
     const [isClient, setIsClient] = useState(false);
     const [currentProvider, setCurrentProvider] = useState<TileProvider>(getTileProvider(provider));
+    const [mapKey, setMapKey] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setIsClient(true);
+        
+        // Cleanup on unmount to prevent "container reused" error
+        return () => {
+            if (containerRef.current) {
+                const container = containerRef.current.querySelector('.leaflet-container');
+                if (container && (container as any)._leaflet_id) {
+                    delete (container as any)._leaflet_id;
+                }
+            }
+        };
     }, []);
 
     useEffect(() => {
@@ -58,26 +72,29 @@ export default function BasicMap({
     }
 
     return (
-        <MapContainer
-            center={center}
-            zoom={zoom}
-            scrollWheelZoom={scrollWheelZoom}
-            zoomControl={zoomControl}
-            className={`h-full w-full z-0 ${className}`}
-            minZoom={defaultMapSettings.minZoom}
-            maxZoom={defaultMapSettings.maxZoom}
-        >
-            <MapController center={center} zoom={zoom} />
+        <div ref={containerRef} className="h-full w-full">
+            <MapContainer
+                key={mapKey}
+                center={center}
+                zoom={zoom}
+                scrollWheelZoom={scrollWheelZoom}
+                zoomControl={zoomControl}
+                className={`h-full w-full z-0 ${className}`}
+                minZoom={defaultMapSettings.minZoom}
+                maxZoom={defaultMapSettings.maxZoom}
+            >
+                <MapController center={center} zoom={zoom} />
 
-            <TileLayer
-                url={currentProvider.url}
-                attribution={currentProvider.attribution}
-                maxZoom={currentProvider.maxZoom}
-                minZoom={currentProvider.minZoom}
-            />
+                <TileLayer
+                    url={currentProvider.url}
+                    attribution={currentProvider.attribution}
+                    maxZoom={currentProvider.maxZoom}
+                    minZoom={currentProvider.minZoom}
+                />
 
-            {children}
-        </MapContainer>
+                {children}
+            </MapContainer>
+        </div>
     );
 }
 

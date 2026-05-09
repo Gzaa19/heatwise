@@ -203,7 +203,7 @@ function AnalysisContent() {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="text-center">
-                    <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
+                    <Loader2 className="h-12 w-12 animate-spin text-heatwise-primary mx-auto mb-4" />
                     <p className="text-muted-foreground">Loading analysis data...</p>
                 </div>
             </div>
@@ -261,7 +261,7 @@ function AnalysisContent() {
             {analysisData?.weather && (
                 <Card className="mb-6">
                     <CardHeader className="pb-3">
-                        <CardTitle className="text-xl text-blue-600 flex items-center gap-2">
+                        <CardTitle className="text-xl text-heatwise-primary flex items-center gap-2">
                             <Cloud className="h-5 w-5" />
                             Weather Information
                         </CardTitle>
@@ -314,7 +314,7 @@ function AnalysisContent() {
             {analysisData?.air_pollution && (
                 <Card className="mb-6">
                     <CardHeader className="pb-3">
-                        <CardTitle className="text-xl text-blue-600 flex items-center gap-2">
+                        <CardTitle className="text-xl text-heatwise-primary flex items-center gap-2">
                             <Factory className="h-5 w-5" />
                             Air Pollution Information
                         </CardTitle>
@@ -475,7 +475,7 @@ function AnalysisContent() {
                                 size="lg"
                                 onClick={handleGenerateAI}
                                 disabled={isGeneratingAI}
-                                className="bg-blue-500 hover:bg-blue-600"
+                                className="bg-heatwise-primary hover:bg-heatwise-primary/90"
                             >
                                 {isGeneratingAI ? (
                                     <>
@@ -665,7 +665,7 @@ export default function AnalysisPage() {
         <Suspense fallback={
             <div className="flex items-center justify-center min-h-screen">
                 <div className="text-center">
-                    <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
+                    <Loader2 className="h-12 w-12 animate-spin text-heatwise-primary mx-auto mb-4" />
                     <p className="text-muted-foreground">Loading...</p>
                 </div>
             </div>

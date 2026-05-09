@@ -57,7 +57,7 @@ export default function HeatMap({
         <div className="mb-4">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-primary" />
+              <MapPin className="h-5 w-5 text-heatwise-primary" />
               <h2 className="text-xl font-bold">Urban Heat Map</h2>
             </div>
             <div className="flex items-center gap-3">
@@ -73,7 +73,7 @@ export default function HeatMap({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg text-sm text-blue-800">
+          <div className="flex items-center gap-2 p-3 bg-heatwise-primary/10 rounded-lg text-sm text-heatwise-primary">
             <MousePointer className="h-4 w-4" />
             <span>Click anywhere on the map to analyze that location</span>
           </div>

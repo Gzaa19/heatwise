@@ -46,19 +46,9 @@ function LocationMarkerContent({
 }) {
     return (
         <div className="p-3 min-w-[240px]">
-            <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-blue-500" />
-                    <span className="font-semibold">Selected Location</span>
-                </div>
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 w-6 p-0"
-                    onClick={onClose}
-                >
-                    <X className="h-4 w-4" />
-                </Button>
+            <div className="flex items-center gap-2 mb-3">
+                <MapPin className="h-5 w-5 text-blue-500" />
+                <span className="font-semibold">Selected Location</span>
             </div>
 
             <div className="space-y-2 text-sm mb-4">

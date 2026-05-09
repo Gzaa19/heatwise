@@ -20,7 +20,7 @@ const HeatMap = dynamic(() => import('@/components/HeatMap'), {
         <Card className="p-6">
             <div className="h-[600px] flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-heatwise-primary mx-auto mb-4"></div>
                     <p className="text-muted-foreground">Loading heat map...</p>
                 </div>
             </div>
@@ -34,9 +34,9 @@ export default function HeatMapPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900">Heat Map</h1>
-                    <p className="text-gray-600 mt-1">
-                        Visualisasi sebaran suhu dan urban heat island di Jakarta
+                    <h1 className="text-3xl font-bold text-foreground">Heat Map</h1>
+                    <p className="text-muted-foreground mt-1">
+                        Visualization of temperature distribution and urban heat island in Jakarta
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
